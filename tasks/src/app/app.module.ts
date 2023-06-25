@@ -6,20 +6,47 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  NbAuthModule,
+  NbAuthOAuth2Token,
+  NbOAuth2AuthStrategy,
+  NbOAuth2ResponseType,
+} from '@nebular/auth';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'dark' }),
     NbLayoutModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    HttpClientModule,
+    NbAuthModule.forRoot({
+      strategies: [
+        NbOAuth2AuthStrategy.setup({
+          name: 'iron',
+          baseEndpoint: `http://localhost:8000/o/`,
+          clientId: 'herePublicCliendId',
+          authorize: {
+            responseType: NbOAuth2ResponseType.CODE,
+            scope: 'read write',
+            redirectUri: `http://localhost:4200/oauth2/callback`,
+          },
+          token: {
+            endpoint: 'token/',
+            class: NbAuthOAuth2Token,
+          },
+          redirect: {
+            success: '/',
+          },
+        }),
+      ],
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
