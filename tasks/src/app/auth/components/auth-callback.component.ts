@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbAuthResult, NbAuthService } from '@nebular/auth';
 import { Subject, takeUntil } from 'rxjs';
