@@ -18,7 +18,7 @@
 
 ## Retrieve principal user detail endpoint
 
-Try `testing-secured` endpoint, don't forget  generate `token` value
+Try `testing-secured` endpoint, don't forget  generate `token` on auth_server auth provider application
 
 ```bash
 curl --location 'http://localhost:8080/testing-secured' \
