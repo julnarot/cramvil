@@ -1,23 +1,25 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { NbAuthService } from '@nebular/auth';
-import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-auth-login',
   template: `
-    <p>{{ token | json }}</p>
-    <button nbButton status="success" *ngIf="!token" (click)="login()">
-      Sign In
-    </button>
-    <button nbButton status="warning" *ngIf="token" (click)="logout()">
-      Sign Out
-    </button>
+    <ng-container *ngIf="!!token; else noLogged">
+      <p>{{ token | json }}</p>
+      <button nbButton status="warning" *ngIf="token" (click)="logout()">
+        Sign Out
+      </button>
+    </ng-container>
+    <ng-template #noLogged>
+      <p>You are'nt logged</p>
+      <button nbButton status="success" (click)="login()">Sign In</button>
+    </ng-template>
   `,
   styles: [],
 })
 export class AuthLoginComponent {
   token: any = null;
 
-  constructor(private authService: NbAuthService) {
+  constructor(private readonly authService: NbAuthService) {
     this.authService.onTokenChange().subscribe((token: any) => {
       this.token = null;
       if (token && token.isValid()) {

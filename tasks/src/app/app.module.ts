@@ -29,11 +29,12 @@ import {
         NbOAuth2AuthStrategy.setup({
           name: 'task-strategy',
           baseEndpoint: `http://localhost:8000/o/`,
-          clientId: 'herePublicCliendId',
+          clientId: 'P2hTnPMATcBvFBbuUbbPDgP6q5nvqdIrWMgvY6dB',
+          // clientScret: 'Pz5R0w3R7QuczBWYNibHpOG0gmBw3hvGuoFiNzlCNiw7A5AfXkAWJ2jIDqlEXCfzdoAdQj22AlPYEkIbeLpDHjB4OMgZGTti1tKWbGNpf8lELupqECRxElN2m45MzJCC',
           authorize: {
             responseType: NbOAuth2ResponseType.CODE,
             scope: 'read write',
-            redirectUri: `http://localhost:4200/oauth2/callback`,
+            redirectUri: `http://localhost:4200/auth/callback`,
           },
           token: {
             endpoint: 'token/',
