@@ -13,7 +13,7 @@ python manage.py runserver
 
 ## Create authorization grant type oauth application
 
-* Go in your browser http://127.0.0.1:8000/o/applications/register/ for register a new application
+* Go in your browser `http://127.0.0.1:8000/o/applications/register/` for register a new application
 * Assign name application
 * Copy clientId and clientSecret values
 * Select `Public` option on Client Type selector
