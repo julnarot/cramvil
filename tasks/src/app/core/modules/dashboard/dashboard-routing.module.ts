@@ -6,6 +6,15 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('../../../features/check-list/check-list.module').then(
+            (cl) => cl.CheckListModule
+          ),
+      },
+    ],
   },
 ];
 

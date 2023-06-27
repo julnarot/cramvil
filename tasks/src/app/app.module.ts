@@ -4,8 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbThemeModule } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
 import {
   NbAuthModule,
@@ -21,8 +20,6 @@ import {
     AppRoutingModule,
     BrowserAnimationsModule,
     NbThemeModule.forRoot({ name: 'dark' }),
-    NbLayoutModule,
-    NbEvaIconsModule,
     HttpClientModule,
     NbAuthModule.forRoot({
       strategies: [
@@ -30,7 +27,6 @@ import {
           name: 'task-strategy',
           baseEndpoint: `http://localhost:8000/o/`,
           clientId: 'P2hTnPMATcBvFBbuUbbPDgP6q5nvqdIrWMgvY6dB',
-          // clientScret: 'Pz5R0w3R7QuczBWYNibHpOG0gmBw3hvGuoFiNzlCNiw7A5AfXkAWJ2jIDqlEXCfzdoAdQj22AlPYEkIbeLpDHjB4OMgZGTti1tKWbGNpf8lELupqECRxElN2m45MzJCC',
           authorize: {
             responseType: NbOAuth2ResponseType.CODE,
             scope: 'read write',

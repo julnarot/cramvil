@@ -3,8 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dashboard',
   template: `
-    <p>dashboard works!</p>
-    <router-outlet></router-outlet>
+    <nb-layout>
+      <nb-layout-header>
+        <h4>TAKS</h4>
+      </nb-layout-header>
+      <nb-layout-column>
+        <router-outlet></router-outlet>
+      </nb-layout-column>
+    </nb-layout>
   `,
   styles: [],
 })
