@@ -4,7 +4,8 @@ import { CheckListContainerComponent } from './components/check-list-container/c
 import { CheckListItemComponent } from './components/check-list-item/check-list-item.component';
 import { CheckListRoutingModule } from './check-list-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NbCheckboxModule, NbListModule } from '@nebular/theme';
+import { NbCheckboxModule, NbInputModule, NbListModule } from '@nebular/theme';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CheckListContainerComponent, CheckListItemComponent],
@@ -14,6 +15,9 @@ import { NbCheckboxModule, NbListModule } from '@nebular/theme';
     SharedModule,
     NbListModule,
     NbCheckboxModule,
+    NbInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [CheckListContainerComponent],
 })

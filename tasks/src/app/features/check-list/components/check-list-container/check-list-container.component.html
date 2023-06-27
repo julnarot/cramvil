@@ -1,19 +1,43 @@
 <div class="container-center">
-  <nb-card>
-    <nb-card-header>
-      TODO
-    </nb-card-header>
-    <nb-card-body >
-      <nb-list>
-        <nb-list-item *ngFor="let task of tasks$ | async">
+  <nb-card [style.display]="(isAdding$ | async) ? 'none' : 'flex'">
+    <nb-card-header> TODO </nb-card-header>
+    <nb-card-body class="p-0" *ngIf="tasks$ | async as tasks">
+      <nb-list *ngIf="tasks.length > 0; else notTasksFound">
+        <nb-list-item *ngFor="let task of tasks">
           <nb-checkbox>
-            <span>{{task.name | uppercase}}</span>
+            <span>{{ task.name | uppercase }}</span>
           </nb-checkbox>
-          <button nbButton  ghost rounded status="danger">
+          <button nbButton ghost rounded status="danger">
             <nb-icon icon="trash-outline"></nb-icon>
           </button>
         </nb-list-item>
       </nb-list>
     </nb-card-body>
   </nb-card>
+  <nb-card *ngIf="isAdding$ | async">
+    <nb-card-header> ADDING NEW TASK </nb-card-header>
+    <nb-card-body>
+      <textarea
+        nbInput
+        fullWidth
+        [formControl]="taskNameFmCtrl"
+      ></textarea>
+    </nb-card-body>
+    <nb-card-footer>
+      <button
+        nbButton
+        fullWidth
+        status="primary"
+        [disabled]="taskNameFmCtrl.invalid"
+        (click)="onSaveNewTask()"
+      >
+        save
+      </button>
+    </nb-card-footer>
+  </nb-card>
 </div>
+
+<ng-template #notTasksFound>
+  <app-list-content-not-found></app-list-content-not-found>
+</ng-template>
+<app-floating-button (clicked)="onAdding()"></app-floating-button>

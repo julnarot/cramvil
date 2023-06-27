@@ -9,7 +9,6 @@
 nb-card {
 width: 400px;
   nb-card-body {
-    padding: 0;
     nb-list {
       nb-list-item {
         justify-content: space-between;
@@ -18,4 +17,7 @@ width: 400px;
   }
 }
 
+.p-0 {
+  padding: 0;
+}
 
