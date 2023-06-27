@@ -1,0 +1,19 @@
+<div class="container-center">
+  <nb-card>
+    <nb-card-header>
+      TODO
+    </nb-card-header>
+    <nb-card-body >
+      <nb-list>
+        <nb-list-item *ngFor="let task of tasks$ | async">
+          <nb-checkbox>
+            <span>{{task.name | uppercase}}</span>
+          </nb-checkbox>
+          <button nbButton  ghost rounded status="danger">
+            <nb-icon icon="trash-outline"></nb-icon>
+          </button>
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+  </nb-card>
+</div>

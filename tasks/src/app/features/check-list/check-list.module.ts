@@ -1,0 +1,20 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CheckListContainerComponent } from './components/check-list-container/check-list-container.component';
+import { CheckListItemComponent } from './components/check-list-item/check-list-item.component';
+import { CheckListRoutingModule } from './check-list-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NbCheckboxModule, NbListModule } from '@nebular/theme';
+
+@NgModule({
+  declarations: [CheckListContainerComponent, CheckListItemComponent],
+  imports: [
+    CommonModule,
+    CheckListRoutingModule,
+    SharedModule,
+    NbListModule,
+    NbCheckboxModule,
+  ],
+  exports: [CheckListContainerComponent],
+})
+export class CheckListModule {}
