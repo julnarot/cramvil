@@ -10,7 +10,6 @@ export class TaskService {
   constructor(private readonly httpClient: HttpClient) {}
   saveNewTaskApi(newTask: Task): Observable<Task> {
     // return this.httpClient.post<Task>('', newTask);
-    return of(newTask)
-    // return this.httpClient.post<Task>('', newTask);
+    return of(newTask);
   }
 }

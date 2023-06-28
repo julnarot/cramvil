@@ -1,4 +1,4 @@
-import { Observable, Subject, tap } from 'rxjs';
+import { Observable, Subject, take, tap } from 'rxjs';
 import { Task } from '../models/task';
 import { TaskService } from '../services/task.service';
 import { TaskState } from '../states/task-state';
@@ -30,8 +30,16 @@ export class TaskFacade {
   cancelAddingNewTask() {
     this._isAddingNewTask$.next(false);
   }
-  addNewTaskAction(task: Task): void {
-    this.taskState.setTasks([task]);
-    this.cancelAddingNewTask();
+  addNewTaskAction(task: Task) {
+    this.tasks$
+      .pipe(
+        take(1),
+        tap((_) => this.cancelAddingNewTask())
+      )
+      .subscribe((tasks) => this.addTaskToList(task, tasks));
+  }
+
+  addTaskToList(task: Task, tasks: Task[]): void {
+    this.taskState.setTasks([task, ...tasks]);
   }
 }
