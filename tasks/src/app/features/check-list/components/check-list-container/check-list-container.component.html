@@ -14,27 +14,7 @@
       </nb-list>
     </nb-card-body>
   </nb-card>
-  <nb-card *ngIf="isAdding$ | async">
-    <nb-card-header> ADDING NEW TASK </nb-card-header>
-    <nb-card-body>
-      <textarea
-        nbInput
-        fullWidth
-        [formControl]="taskNameFmCtrl"
-      ></textarea>
-    </nb-card-body>
-    <nb-card-footer>
-      <button
-        nbButton
-        fullWidth
-        status="primary"
-        [disabled]="taskNameFmCtrl.invalid"
-        (click)="onSaveNewTask()"
-      >
-        save
-      </button>
-    </nb-card-footer>
-  </nb-card>
+  <app-check-list-form-new *ngIf="isAdding$ | async"></app-check-list-form-new>
 </div>
 
 <ng-template #notTasksFound>

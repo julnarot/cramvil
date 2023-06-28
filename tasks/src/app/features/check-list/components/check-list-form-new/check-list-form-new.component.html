@@ -1,0 +1,21 @@
+<nb-card>
+  <nb-card-header> ADDING NEW TASK </nb-card-header>
+  <nb-card-body>
+    <textarea
+      nbInput
+      fullWidth
+      [formControl]="taskNameFmCtrl"
+    ></textarea>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      nbButton
+      fullWidth
+      status="primary"
+      [disabled]="taskNameFmCtrl.invalid"
+      (click)="onSaveNewTask()"
+    >
+      save
+    </button>
+  </nb-card-footer>
+</nb-card>

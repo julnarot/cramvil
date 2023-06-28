@@ -6,9 +6,10 @@ import { CheckListRoutingModule } from './check-list-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NbCheckboxModule, NbInputModule, NbListModule } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckListFormNewComponent } from './components/check-list-form-new/check-list-form-new.component';
 
 @NgModule({
-  declarations: [CheckListContainerComponent, CheckListItemComponent],
+  declarations: [CheckListContainerComponent, CheckListItemComponent, CheckListFormNewComponent],
   imports: [
     CommonModule,
     CheckListRoutingModule,
