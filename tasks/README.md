@@ -25,3 +25,6 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Analizer
+
+Run `npm run build:stats` to build and finally run `npm run analyzer`. go [webpack bundle](http://127.0.0.1:8888)
