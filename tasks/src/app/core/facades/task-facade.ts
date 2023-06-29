@@ -18,7 +18,7 @@ export class TaskFacade {
     this.addingNewTask();
     return this.taskService
       .saveNewTaskApi(newTask)
-      .pipe(tap((task) => this.addNewTaskAction(task)));
+      .pipe(tap((taskSaved) => this.addNewTaskAction(taskSaved)));
   }
 
   isAddingNewTask$(): Observable<boolean> {
@@ -30,16 +30,16 @@ export class TaskFacade {
   cancelAddingNewTask() {
     this._isAddingNewTask$.next(false);
   }
-  addNewTaskAction(task: Task) {
+  addNewTaskAction(taskSaved: Task) {
     this.tasks$
       .pipe(
         take(1),
         tap((_) => this.cancelAddingNewTask())
       )
-      .subscribe((tasks) => this.addTaskToList(task, tasks));
+      .subscribe((currentTaskList) => this.addTaskToList(taskSaved, currentTaskList));
   }
 
-  addTaskToList(task: Task, tasks: Task[]): void {
+  private addTaskToList(task: Task, tasks: Task[]): void {
     this.taskState.setTasks([task, ...tasks]);
   }
 }
