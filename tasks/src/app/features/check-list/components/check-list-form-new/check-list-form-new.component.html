@@ -1,10 +1,17 @@
 <nb-card>
   <nb-card-header> ADDING NEW TASK </nb-card-header>
   <nb-card-body>
+    <nb-badge
+      *ngIf="charsAvailable > maxLen - 10"
+      status="{{ charsAvailable > maxLen ? 'danger' : 'success' }}"
+      text="{{ maxLen - charsAvailable }}/{{ maxLen }}"
+    ></nb-badge>
     <textarea
       nbInput
-      fullWidth
+      fullWidth appInputFocus
+      [status]="taskNameFmCtrl.valid ? 'success' : 'danger'"
       [formControl]="taskNameFmCtrl"
+      (keydown.Escape)="onCancelAdding()"
     ></textarea>
   </nb-card-body>
   <nb-card-footer>
