@@ -36,10 +36,21 @@ export class TaskFacade {
         take(1),
         tap((_) => this.cancelAddingNewTask())
       )
-      .subscribe((currentTaskList) => this.addTaskToList(taskSaved, currentTaskList));
+      .subscribe((currentTaskList) =>
+        this.addTaskToList(taskSaved, currentTaskList)
+      );
   }
 
   private addTaskToList(task: Task, tasks: Task[]): void {
     this.taskState.setTasks([task, ...tasks]);
+  }
+  removeTask(task: Task) {
+    this.tasks$
+      .pipe(take(1))
+      .subscribe((currentTaskList) =>
+        this.taskState.setTasks(
+          [...currentTaskList].filter((f) => f.id !== task.id)
+        ),
+      );
   }
 }

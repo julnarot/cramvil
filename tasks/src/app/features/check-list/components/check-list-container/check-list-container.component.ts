@@ -18,4 +18,7 @@ export class CheckListContainerComponent {
   onAdding() {
     this.taskFacades.addingNewTask();
   }
+  onRemoveTask(task: Task) {
+    this.taskFacades.removeTask(task);
+  }
 }

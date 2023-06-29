@@ -8,9 +8,12 @@
       <nb-card-body class="p-0">
         <nb-list *ngIf="tasks.length > 0; else notTasksFound">
           <nb-list-item *ngFor="let task of tasks">
-            <ng-container [ngTemplateOutlet]="task.checked ? tempTaskChecked :tempTaskUnChecked "
-            [ngTemplateOutletContext]="{task:task}">
-
+            <ng-container
+              [ngTemplateOutlet]="
+                task.checked ? tempTaskChecked : tempTaskUnChecked
+              "
+              [ngTemplateOutletContext]="{ task: task }"
+            >
             </ng-container>
           </nb-list-item>
         </nb-list>
@@ -29,7 +32,7 @@
   <nb-checkbox [(checked)]="task.checked">
     <span>{{ task.name }}</span>
   </nb-checkbox>
-  <button nbButton ghost rounded status="danger" size="small">
+  <button nbButton ghost rounded status="danger" size="small" (click)="onRemoveTask(task)">
     <nb-icon icon="trash-outline"></nb-icon>
   </button>
 </ng-template>
