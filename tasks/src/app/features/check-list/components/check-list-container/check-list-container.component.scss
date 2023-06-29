@@ -7,17 +7,27 @@
   padding: 10px;
 }
 nb-card {
-width: 400px;
+  width: 400px;
   nb-card-body {
     nb-list {
       nb-list-item {
         justify-content: space-between;
+        nb-checkbox {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
     }
   }
 }
 
+.item-list-completed {
+  text-decoration: line-through;
+  font-style: oblique;
+  color: #777;
+}
+
 .p-0 {
   padding: 0;
 }
-

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Observable, of, startWith } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable, startWith } from 'rxjs';
 import { TaskFacade } from 'src/app/core/facades/task-facade';
 import { Task } from 'src/app/core/models/task';
 

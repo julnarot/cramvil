@@ -1,22 +1,38 @@
 <div class="container-center">
-  <nb-card [style.display]="(isAdding$ | async) ? 'none' : 'flex'">
-    <nb-card-header> TODO </nb-card-header>
-    <nb-card-body class="p-0" *ngIf="tasks$ | async as tasks">
-      <nb-list *ngIf="tasks.length > 0; else notTasksFound">
-        <nb-list-item *ngFor="let task of tasks">
-          <nb-checkbox>
-            <span>{{ task.name | uppercase }}</span>
-          </nb-checkbox>
-          <button nbButton ghost rounded status="danger">
-            <nb-icon icon="trash-outline"></nb-icon>
-          </button>
-        </nb-list-item>
-      </nb-list>
-    </nb-card-body>
-  </nb-card>
+  <ng-container *ngIf="tasks$ | async as tasks">
+    <nb-card
+      [size]="tasks.length > 4 ? 'small' : ''"
+      *ngIf="!(isAdding$ | async)"
+    >
+      <nb-card-header> TODO </nb-card-header>
+      <nb-card-body class="p-0">
+        <nb-list *ngIf="tasks.length > 0; else notTasksFound">
+          <nb-list-item *ngFor="let task of tasks">
+            <ng-container [ngTemplateOutlet]="task.checked ? tempTaskChecked :tempTaskUnChecked "
+            [ngTemplateOutletContext]="{task:task}">
+
+            </ng-container>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </ng-container>
   <app-check-list-form-new *ngIf="isAdding$ | async"></app-check-list-form-new>
 </div>
 
+<ng-template #tempTaskChecked let-task="task">
+  <nb-checkbox [(checked)]="task.checked" status="info">
+    <span class="item-list-completed">{{ task.name }}</span>
+  </nb-checkbox>
+</ng-template>
+<ng-template #tempTaskUnChecked let-task="task">
+  <nb-checkbox [(checked)]="task.checked">
+    <span>{{ task.name }}</span>
+  </nb-checkbox>
+  <button nbButton ghost rounded status="danger" size="small">
+    <nb-icon icon="trash-outline"></nb-icon>
+  </button>
+</ng-template>
 <ng-template #notTasksFound>
   <app-list-content-not-found></app-list-content-not-found>
 </ng-template>
