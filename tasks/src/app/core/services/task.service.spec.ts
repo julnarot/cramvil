@@ -29,7 +29,6 @@ describe('TaskService', () => {
     expect(service).toBeTruthy();
   });
 
-
   it('should save Api task', () => {
     let _task: Task = adapter.adapt(firstTaskResponseSpec);
     service.saveNewTaskApi(_task).subscribe((resultTask) => {
@@ -37,7 +36,7 @@ describe('TaskService', () => {
     });
 
     const request = controller.expectOne(environment.taskResource + '/task');
-    request.flush({ data: firstTaskResponseSpec });
+    request.flush(firstTaskResponseSpec);
     expect(request.request.method).toEqual('POST');
     controller.verify();
   });
