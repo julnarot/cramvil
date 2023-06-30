@@ -10,9 +10,9 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Setup
-        run: npm ci
+     # - name: Setup
+     #   run: npm ci
 
       - name: Test
         run: |
-          npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+          npm test --prefix tasks
