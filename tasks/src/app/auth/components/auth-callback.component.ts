@@ -16,7 +16,7 @@ export class AuthCallbackComponent implements OnDestroy {
     private readonly router: Router,
   ) {
     this.authService
-      .authenticate('task-strategy')
+      .authenticate('email')
       .pipe(takeUntil(this.destroy$))
       .subscribe((authResult: NbAuthResult) => {
         if (authResult.isSuccess() && authResult.getRedirect()) {

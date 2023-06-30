@@ -24,7 +24,7 @@ import {
     NbAuthModule.forRoot({
       strategies: [
         NbOAuth2AuthStrategy.setup({
-          name: 'task-strategy',
+          name: 'email',
           baseEndpoint: `http://localhost:8000/o/`,
           clientId: 'P2hTnPMATcBvFBbuUbbPDgP6q5nvqdIrWMgvY6dB',
           authorize: {

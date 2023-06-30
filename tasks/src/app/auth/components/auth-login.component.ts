@@ -29,12 +29,12 @@ export class AuthLoginComponent {
   }
 
   login() {
-    this.authService.authenticate('task-strategy').subscribe((lo: any) => {
+    this.authService.authenticate('email').subscribe((lo: any) => {
       console.log(lo);
     });
   }
 
   logout() {
-    this.authService.logout('task-strategy').subscribe(() => {});
+    this.authService.logout('email').subscribe(() => {});
   }
 }

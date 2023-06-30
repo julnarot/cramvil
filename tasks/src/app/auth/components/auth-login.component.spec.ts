@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthLoginComponent } from './auth-login.component';
+import { NbAuthModule } from '@nebular/auth';
 
 describe('AuthLoginComponent', () => {
   let component: AuthLoginComponent;
@@ -8,6 +9,7 @@ describe('AuthLoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [NbAuthModule.forRoot()],
       declarations: [ AuthLoginComponent ]
     })
     .compileComponents();
