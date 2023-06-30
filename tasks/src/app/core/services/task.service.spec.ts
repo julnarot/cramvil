@@ -1,23 +1,42 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TaskService } from './task.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NbOAuth2AuthStrategy } from '@nebular/auth';
-import { ActivatedRoute } from '@angular/router';
-import { NB_WINDOW } from '@nebular/theme';
+import { Task } from '../models/task';
+import { environment } from 'src/environments/environment';
+import { firstTaskResponseSpec } from '../spec-helpers/task-spec-helper';
+import { TaskAdapter } from '../adapters/task-adapter';
 
 describe('TaskService', () => {
   let service: TaskService;
+  let adapter: TaskAdapter;
+  let controller: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
     });
     service = TestBed.inject(TaskService);
+    controller = TestBed.inject(HttpTestingController);
+    adapter = TestBed.inject(TaskAdapter);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should save Api task', () => {
+    let _task: Task = adapter.adapt(firstTaskResponseSpec);
+    service.saveNewTaskApi(_task).subscribe((resultTask) => {
+      expect(_task).toEqual(resultTask);
+    });
+
+    const request = controller.expectNone(environment.taskResource + '/task');
+    request.flush({ data: firstTaskResponseSpec });
+    controller.verify();
   });
 });
