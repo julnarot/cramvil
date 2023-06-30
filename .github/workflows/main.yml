@@ -10,8 +10,8 @@ jobs:
         with:
           node-version: 16.x
 
-     # - name: Setup
-     #   run: npm ci
+      - name: Setup
+        run: npm ci --prefix tasks
 
       - name: Test
         run: |
