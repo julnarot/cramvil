@@ -1,1 +1,28 @@
-<p>check-list-item works!</p>
+<div *ngIf="task && task.id">
+  <ng-container
+    [ngTemplateOutlet]="task.checked ? tempTaskChecked : tempTaskUnChecked"
+    [ngTemplateOutletContext]="{ task: task }"
+  >
+  </ng-container>
+
+  <ng-template #tempTaskChecked let-task="task">
+    <nb-checkbox [(checked)]="task.checked" status="info">
+      <span class="item-list-completed">{{ task.name }}</span>
+    </nb-checkbox>
+  </ng-template>
+  <ng-template #tempTaskUnChecked let-task="task">
+    <nb-checkbox [(checked)]="task.checked">
+      <span>{{ task.name }}</span>
+    </nb-checkbox>
+    <button
+      nbButton
+      ghost
+      rounded
+      status="danger"
+      size="small"
+      (click)="removeTaskClicked.emit(task)"
+    >
+      <nb-icon icon="trash-outline"></nb-icon>
+    </button>
+  </ng-template>
+</div>

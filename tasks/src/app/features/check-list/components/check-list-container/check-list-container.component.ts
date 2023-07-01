@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable, startWith } from 'rxjs';
+import { NbDialogService } from '@nebular/theme';
+import { Observable, startWith, tap } from 'rxjs';
 import { TaskFacade } from 'src/app/core/facades/task-facade';
 import { Task } from 'src/app/core/models/task';
+import { CheckListFormNewComponent } from '../check-list-form-new/check-list-form-new.component';
 
 @Component({
   selector: 'app-check-list-container',
@@ -9,13 +11,21 @@ import { Task } from 'src/app/core/models/task';
   styleUrls: ['./check-list-container.component.scss'],
 })
 export class CheckListContainerComponent {
-  tasks$: Observable<Task[]> = this.taskFacades.tasks$.pipe(startWith([]));
-  isAdding$: Observable<boolean> = this.taskFacades
-    .isAddingNewTask$()
-    .pipe(startWith(false));
-  constructor(private readonly taskFacades: TaskFacade) {}
+  tasksCounter = 0;
+  tasks$: Observable<Task[]> = this.taskFacades.tasks$.pipe(
+    // startWith([]),
+    tap((t) => (this.tasksCounter = t.length))
+  );
 
-  onAdding() {
+  constructor(
+    private readonly taskFacades: TaskFacade,
+    private readonly dialogService: NbDialogService
+  ) {}
+
+  lauchFormNew() {
+    this.dialogService
+      .open(CheckListFormNewComponent)
+      .onClose.subscribe((result) => console.log(result));
     this.taskFacades.addingNewTask();
   }
   onRemoveTask(task: Task) {

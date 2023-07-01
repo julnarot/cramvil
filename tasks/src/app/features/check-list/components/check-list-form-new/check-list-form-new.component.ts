@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { NbDialogRef } from '@nebular/theme';
 import { TaskFacade } from 'src/app/core/facades/task-facade';
 
 @Component({
@@ -16,7 +17,10 @@ export class CheckListFormNewComponent {
     Validators.minLength(this.minLen),
     Validators.maxLength(this.maxLen),
   ]);
-  constructor(private readonly taskFacades: TaskFacade) {
+  constructor(
+    private readonly taskFacades: TaskFacade,
+    private readonly dialgoRef: NbDialogRef<CheckListFormNewComponent>
+  ) {
     this.taskNameFmCtrl.valueChanges.subscribe((s) => {
       if (s && typeof s === 'string') {
         this.charsAvailable = s.length;
@@ -24,11 +28,11 @@ export class CheckListFormNewComponent {
     });
   }
   onSaveNewTask() {
-    if (this.taskNameFmCtrl.valid && this.taskNameFmCtrl.value) {
-      this.taskFacades.saveNewTask(this.taskNameFmCtrl.value).subscribe();
+    if (this.taskNameFmCtrl.valid && this.taskNameFmCtrl.value !== null) {
+      this.taskFacades
+        .saveNewTask(this.taskNameFmCtrl.value)
+        .subscribe((taskSaved) => this.dialgoRef.close(taskSaved));
     }
   }
-  onCancelAdding() {
-    this.taskFacades.cancelAddingNewTask();
-  }
+
 }

@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import {
   NbBadgeModule,
   NbCheckboxModule,
+  NbDialogModule,
   NbInputModule,
   NbListModule,
 } from '@nebular/theme';
@@ -31,6 +32,7 @@ import { InputDirectivesModule } from 'src/app/shared/directives/input-directive
     ReactiveFormsModule,
     NbBadgeModule,
     InputDirectivesModule,
+    NbDialogModule.forChild()
   ],
   exports: [CheckListContainerComponent],
 })

@@ -8,10 +8,10 @@
     ></nb-badge>
     <textarea
       nbInput
-      fullWidth appInputFocus
+      fullWidth
+      appInputFocus
       [status]="taskNameFmCtrl.valid ? 'success' : 'danger'"
       [formControl]="taskNameFmCtrl"
-      (keydown.Escape)="onCancelAdding()"
     ></textarea>
   </nb-card-body>
   <nb-card-footer>

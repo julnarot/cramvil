@@ -1,0 +1,14 @@
+div {
+  justify-content: space-between;
+  nb-checkbox {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.item-list-completed {
+  text-decoration: line-through;
+  font-style: oblique;
+  color: #777;
+}
