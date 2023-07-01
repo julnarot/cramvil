@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ITaskResponse, Task } from '../models/task';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskAdapter {
   adapt = (input: ITaskResponse) =>
@@ -10,4 +10,6 @@ export class TaskAdapter {
       id: input?.id,
       name: input?.name,
     });
+  adaptArray = (tasks: ITaskResponse[]) =>
+    tasks.map((itask) => this.adapt(itask));
 }
