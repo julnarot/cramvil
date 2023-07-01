@@ -29,12 +29,10 @@ export class AuthLoginComponent {
   }
 
   login() {
-    this.authService.authenticate('email').subscribe((lo: any) => {
-      console.log(lo);
-    });
+    this.authService.authenticate('email').subscribe();
   }
 
   logout() {
-    this.authService.logout('email').subscribe(() => {});
+    this.authService.logout('email').subscribe();
   }
 }
