@@ -1,0 +1,24 @@
+name: CI Angular app through Github Actions
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Setup
+        run: npm ci --prefix tasks
+
+      - name: Test
+        run: |
+          npm test --prefix tasks
+      - name: Comment Test Coverage
+        uses: AthleticNet/comment-test-coverage@1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: tasks/coverage/tasks/coverage-summary.json
+          title: Karma Test Coverage
