@@ -22,11 +22,15 @@ export class CheckListFormNewComponent {
     private readonly taskFacades: TaskFacade,
     private readonly dialgoRef: NbDialogRef<CheckListFormNewComponent>
   ) {
-    this.taskNameFmCtrl.valueChanges.pipe(tap(txt=>{
-      if (txt && typeof txt === 'string') {
-        this.charsAvailable = txt.length;
-      }
-    })).subscribe();
+    this.taskNameFmCtrl.valueChanges
+      .pipe(
+        tap((txt) => {
+          if (txt && typeof txt === 'string') {
+            this.charsAvailable = txt.length;
+          }
+        })
+      )
+      .subscribe();
   }
   onSaveNewTask() {
     if (this.taskNameFmCtrl.valid && this.taskNameFmCtrl.value !== null) {
@@ -35,5 +39,4 @@ export class CheckListFormNewComponent {
         .subscribe((taskSaved) => this.dialgoRef.close(taskSaved));
     }
   }
-
 }

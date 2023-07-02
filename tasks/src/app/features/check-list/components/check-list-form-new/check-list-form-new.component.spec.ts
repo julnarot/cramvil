@@ -6,6 +6,7 @@ import { NbDialogRef } from '@nebular/theme';
 describe('CheckListFormNewComponent', () => {
   let component: CheckListFormNewComponent;
   let fixture: ComponentFixture<CheckListFormNewComponent>;
+  let nbDialogRef = jasmine.createSpyObj('NbDialogRef', ['close']);
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -14,7 +15,7 @@ describe('CheckListFormNewComponent', () => {
       providers: [
         {
           provide: NbDialogRef,
-          useValue: {},
+          useValue: nbDialogRef,
         },
       ],
     }).compileComponents();
@@ -37,4 +38,14 @@ describe('CheckListFormNewComponent', () => {
     expect(formControl.invalid).toBeTruthy();
   });
 
+  it('should be can save', () => {
+    const formControl = component.taskNameFmCtrl;
+    formControl.setValue('New task');
+    expect(formControl.valid).toBeTruthy();
+    component.onSaveNewTask();
+    expect(nbDialogRef).toBeDefined();
+    setTimeout(() => {
+      expect(nbDialogRef.close()).toHaveBeenCalled();
+    }, 10);
+  });
 });
