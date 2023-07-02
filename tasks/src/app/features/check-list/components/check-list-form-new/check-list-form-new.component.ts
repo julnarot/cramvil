@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
+import { tap } from 'rxjs';
 import { TaskFacade } from 'src/app/core/facades/task-facade';
 
 @Component({
@@ -21,11 +22,11 @@ export class CheckListFormNewComponent {
     private readonly taskFacades: TaskFacade,
     private readonly dialgoRef: NbDialogRef<CheckListFormNewComponent>
   ) {
-    this.taskNameFmCtrl.valueChanges.subscribe((s) => {
-      if (s && typeof s === 'string') {
-        this.charsAvailable = s.length;
+    this.taskNameFmCtrl.valueChanges.pipe(tap(txt=>{
+      if (txt && typeof txt === 'string') {
+        this.charsAvailable = txt.length;
       }
-    });
+    })).subscribe();
   }
   onSaveNewTask() {
     if (this.taskNameFmCtrl.valid && this.taskNameFmCtrl.value !== null) {
