@@ -13,9 +13,10 @@ describe('CheckListFormNewComponent', () => {
       imports: [HttpClientTestingModule],
       providers: [
         {
-          provide: NbDialogRef, useValue: {},
+          provide: NbDialogRef,
+          useValue: {},
         },
-      ]
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CheckListFormNewComponent);
@@ -26,4 +27,14 @@ describe('CheckListFormNewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should set valid value', () => {
+    const formControl = component.taskNameFmCtrl;
+    formControl.setValue('');
+    expect(formControl.valid).toBeFalsy();
+    formControl.setValue('new task');
+    expect(formControl.valid).toBeTruthy();
+    formControl.setValue([...[...Array(71)].map((_) => 'a')].join(''));
+    expect(formControl.invalid).toBeTruthy();
+  });
+
 });
