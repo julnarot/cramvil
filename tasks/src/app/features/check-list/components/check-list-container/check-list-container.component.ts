@@ -13,7 +13,6 @@ import { CheckListFormNewComponent } from '../check-list-form-new/check-list-for
 export class CheckListContainerComponent {
   tasksCounter = 0;
   tasks$: Observable<Task[]> = this.taskFacades.tasks$.pipe(
-    // startWith([]),
     tap((t) => (this.tasksCounter = t.length))
   );
 
@@ -23,10 +22,7 @@ export class CheckListContainerComponent {
   ) {}
 
   lauchFormNew() {
-    this.dialogService
-      .open(CheckListFormNewComponent)
-      .onClose.subscribe((result) => console.log(result));
-    this.taskFacades.addingNewTask();
+    this.dialogService.open(CheckListFormNewComponent);
   }
   onRemoveTask(task: Task) {
     this.taskFacades.removeTask(task);
