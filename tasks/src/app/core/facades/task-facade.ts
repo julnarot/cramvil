@@ -44,7 +44,7 @@ export class TaskFacade {
   private addTaskToList(task: Task, tasks: Task[]): void {
     this.taskState.setTasks([task, ...tasks]);
   }
-  removeTask(task: Task) {
+  removeTask(task: Task): void {
     this.tasks$
       .pipe(take(1))
       .subscribe((currentTaskList) =>
