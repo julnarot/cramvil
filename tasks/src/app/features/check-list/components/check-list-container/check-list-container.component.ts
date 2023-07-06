@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { Observable, startWith, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { TaskFacade } from 'src/app/core/facades/task-facade';
 import { Task } from 'src/app/core/models/task';
 import { CheckListFormNewComponent } from '../check-list-form-new/check-list-form-new.component';
