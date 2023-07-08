@@ -3,12 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckListContainerComponent } from './check-list-container.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
-  NB_DOCUMENT,
   NbDialogModule,
   NbDialogService,
   NbLayoutModule,
   NbOverlayContainerAdapter,
-  NbOverlayService,
   NbThemeModule,
   NbViewportRulerAdapter,
 } from '@nebular/theme';
@@ -31,7 +29,7 @@ export class NbViewportRulerMockAdapter extends NbViewportRulerAdapter {
 describe('CheckListContainerComponent', () => {
   let component: CheckListContainerComponent;
   let fixture: ComponentFixture<CheckListContainerComponent>;
-  const nbDialogService = jasmine.createSpyObj('nbDialogService', ['open']);
+  const dialogServiceSpy = jasmine.createSpyObj('NbDialogService', ['open']);
   let facade: TaskFacade;
   let adapter: TaskAdapter;
   let overlayContainerService: NbOverlayContainerAdapter;
@@ -51,6 +49,7 @@ describe('CheckListContainerComponent', () => {
           provide: NbViewportRulerAdapter,
           useClass: NbViewportRulerMockAdapter,
         },
+        { provide: NbDialogService, useValue: dialogServiceSpy },
       ],
     }).compileComponents();
 
@@ -77,17 +76,14 @@ describe('CheckListContainerComponent', () => {
   });
 
   it('should be dialog service defined', () => {
-    expect(nbDialogService).toBeDefined();
+    expect(dialogServiceSpy).toBeDefined();
   });
 
   it('should be open dialog', () => {
     component.lauchFormNew();
-    expect(component.ref.componentRef).toBeTruthy();
-    setTimeout(() => {
-      expect(
-        component.ref.componentRef instanceof CheckListFormNewComponent
-      ).toBeTruthy();
-    }, 10);
+    expect(dialogServiceSpy.open).toHaveBeenCalledWith(
+      CheckListFormNewComponent
+    );
   });
 
   it('should be remove task from list', () => {
