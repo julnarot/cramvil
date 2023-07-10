@@ -18,9 +18,9 @@ export class TaskFacade {
       .subscribe((tasks) => this.taskState.setTasks(tasks));
   }
 
-  saveNewTask(newTaskName: string): Observable<Task> {
+  saveNewTask(titleNewTask: string): Observable<Task> {
     const newTask = new Task();
-    newTask.name = newTaskName;
+    newTask.title = titleNewTask;
     return this.taskService
       .saveNewTaskApi(newTask)
       .pipe(tap((taskSaved) => this.addNewTaskAction(taskSaved)));

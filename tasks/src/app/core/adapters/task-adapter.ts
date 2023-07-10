@@ -8,7 +8,9 @@ export class TaskAdapter {
   adapt = (input: ITaskResponse) =>
     Object.assign(new Task(), {
       id: input?.id,
-      name: input?.name,
+      title: input?.title,
+      description: input?.description,
+      checked: input?.checked,
     });
   adaptArray = (tasks: ITaskResponse[]) =>
     tasks.map((itask) => this.adapt(itask));

@@ -1,12 +1,14 @@
 export interface ITaskResponse {
-  id?: string;
-  name?: string;
-  checked?: string;
+  id?: number;
+  title?: string;
+  description?: string;
+  username?: string;
+  checked?: boolean;
 }
 
 export class Task {
-  id?: string;
-  name!: string;
-  status!: boolean;
+  id?: number;
+  title!: string;
+  description?: string;
   checked!: boolean;
 }

@@ -7,12 +7,12 @@
 
   <ng-template #tempTaskChecked let-task="task">
     <nb-checkbox [(checked)]="task.checked" status="info">
-      <span class="item-list-completed">{{ task.name }}</span>
+      <span class="item-list-completed">{{ task.title }}</span>
     </nb-checkbox>
   </ng-template>
   <ng-template #tempTaskUnChecked let-task="task">
     <nb-checkbox [(checked)]="task.checked">
-      <span>{{ task.name }}</span>
+      <span>{{ task.title }}</span>
     </nb-checkbox>
     <button
       nbButton

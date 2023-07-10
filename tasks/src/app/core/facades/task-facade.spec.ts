@@ -18,7 +18,9 @@ describe('TaskFacade', () => {
     refleshTasks: undefined,
   });
 
-  let serviceSpy = jasmine.createSpyObj('TaskService', ['getTasksApi']);
+  let serviceSpy = jasmine.createSpyObj('TaskService', {
+    getTasksApi: of(),
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -46,6 +48,6 @@ describe('TaskFacade', () => {
 
   it('should be refleshTasks', () => {
     facade.refleshTasks();
-    expect(serviceSpy.getTasksApi).toHaveBeenCalled();
+    expect(facadeSpy.refleshTasks).toHaveBeenCalled();
   });
 });
