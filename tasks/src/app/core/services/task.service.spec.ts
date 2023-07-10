@@ -29,7 +29,7 @@ describe('TaskService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should save Api task', () => {
+  it('should save taskApi', () => {
     let _task: Task = adapter.adapt(firstTaskResponseSpec);
     service.saveNewTaskApi(_task).subscribe((resultTask) => {
       expect(_task).toEqual(resultTask);
@@ -38,6 +38,17 @@ describe('TaskService', () => {
     const request = controller.expectOne(environment.taskResource + '/task');
     request.flush(firstTaskResponseSpec);
     expect(request.request.method).toEqual('POST');
+    controller.verify();
+  });
+
+  it('should be get tasksApi', () => {
+    const tasksSpect = adapter.adaptArray([firstTaskResponseSpec]);
+    service.getTasksApi().subscribe((tasks: Task[]) => {
+      expect(tasksSpect.length).toEqual(tasks.length);
+    });
+    const request = controller.expectOne(environment.taskResource + '/task');
+    request.flush([firstTaskResponseSpec]);
+    expect(request.request.method).toEqual('GET');
     controller.verify();
   });
 });

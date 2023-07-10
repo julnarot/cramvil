@@ -11,20 +11,24 @@ export class TaskFacade {
     private readonly taskService: TaskService,
     private readonly taskState: TaskState
   ) {}
+
+  refleshTasks(): void {
+    this.taskService
+      .getTasksApi()
+      .subscribe((tasks) => this.taskState.setTasks(tasks));
+  }
+
   saveNewTask(newTaskName: string): Observable<Task> {
     const newTask = new Task();
     newTask.name = newTaskName;
     return this.taskService
       .saveNewTaskApi(newTask)
-      .pipe(tap((taskSaved) => this.addNewTaskAction(taskSaved))
-      );
+      .pipe(tap((taskSaved) => this.addNewTaskAction(taskSaved)));
   }
 
-  addNewTaskAction(taskSaved: Task) {
+  addNewTaskAction(taskSaved: Task): void {
     this.tasks$
-      .pipe(
-        take(1),
-      )
+      .pipe(take(1))
       .subscribe((currentTaskList) =>
         this.addTaskToList(taskSaved, currentTaskList)
       );
@@ -39,7 +43,7 @@ export class TaskFacade {
       .subscribe((currentTaskList) =>
         this.taskState.setTasks(
           [...currentTaskList].filter((f) => f.id !== task.id)
-        ),
+        )
       );
   }
 }

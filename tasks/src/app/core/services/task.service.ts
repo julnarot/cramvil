@@ -21,4 +21,9 @@ export class TaskService {
       .post<ITaskResponse>(this.taskUrl, newTask)
       .pipe(map((task) => this.taskAdapter.adapt(task)));
   }
+  getTasksApi(): Observable<Task[]> {
+    return this.httpClient
+      .get<ITaskResponse[]>(this.taskUrl)
+      .pipe(map((task) => this.taskAdapter.adaptArray(task)));
+  }
 }
