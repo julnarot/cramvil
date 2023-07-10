@@ -16,7 +16,8 @@ export class TaskFacade {
     newTask.name = newTaskName;
     return this.taskService
       .saveNewTaskApi(newTask)
-      .pipe(tap((taskSaved) => this.addNewTaskAction(taskSaved)));
+      .pipe(tap((taskSaved) => this.addNewTaskAction(taskSaved))
+      );
   }
 
   addNewTaskAction(taskSaved: Task) {
