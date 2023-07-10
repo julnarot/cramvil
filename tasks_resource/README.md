@@ -1,6 +1,8 @@
 # Tasks_resource
 
 ## run application
+`export JAVA_HOME=/usr/lib/jvm/jdk-17`
+
 ```bash
 ./gradlew bootRun
 ```
