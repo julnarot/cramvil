@@ -40,7 +40,7 @@ describe('TaskFacade', () => {
   });
 
   it('should be saved task', () => {
-    facade.saveNewTask(task.name).subscribe((resultTask) => {
+    facade.saveNewTask(task.title).subscribe((resultTask) => {
       expect(resultTask).toEqual(task);
       expect(facadeSpy.addNewTaskAction).toHaveBeenCalled();
     });
